@@ -17,11 +17,11 @@ function Get-PublicIpAddress
 [regex]$regex = '([0-9]{1,3}\.){3}([0-9]{1,3})'
 $pageBing = Invoke-WebRequest -Uri "http://www.bing.com/search?q=what+is+my+ip+address"
 $pageGoogle = Invoke-WebRequest -Uri "http://www.google.com/search?q=what+is+my+ip+address&num=1" # num parameter limits search results to 1, otherwise the results end up containing other valid IP adddresses.
-$resultsFromBing = $($regex.Matches($pageBing.Content).Value)
+$resultsFromBing = $($regex.Matches($pageBing.Content).Value)[0]
 $resultsFromGoogle = $($regex.Matches($pageGoogle.Content).Value)
 if( $resultsFromBing -like $resultsFromGoogle ) 
 	{
-	$ipAddress = $regex.Matches($pageBing.Content).Value
+	$ipAddress = $resultsFromGoogle
 	$ipAddress
 	}
 Else
