@@ -19,7 +19,7 @@ $pageBing = Invoke-WebRequest -Uri "http://www.bing.com/search?q=what+is+my+ip+a
 $pageGoogle = Invoke-WebRequest -Uri "http://www.google.com/search?q=what+is+my+ip+address&num=1" # num parameter limits search results to 1, otherwise the results end up containing other valid IP adddresses.
 $resultsFromBing = $($regex.Matches($pageBing.Content).Value)[0]
 $resultsFromGoogle = $($regex.Matches($pageGoogle.Content).Value)
-if( $resultsFromBing -like $resultsFromGoogle ) 
+if( $resultsFromGoogle -like $resultsFromBing ) 
 	{
 	$ipAddress = $resultsFromGoogle
 	$ipAddress
